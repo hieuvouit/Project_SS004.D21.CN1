@@ -4,3 +4,25 @@ body {
     height: 100%;
     margin: 0;
 }
+
+body {
+    background: black;
+    display: grid;
+    grid-template-columns: auto 10vw;
+}
+
+canvas {
+    border: 1px solid white;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#score {
+    color: white;
+    font-size: 40px
+}
