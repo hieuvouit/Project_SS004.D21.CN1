@@ -25,5 +25,30 @@ function loop() {
         context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
     });
 }
+
+// Bảng xếp hạng
+var leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+
+function saveLeaderboard() {
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+}
+
+function updateLeaderboard() {
+    leaderboard.push(score);
+    leaderboard.sort((a, b) => b - a);
+    leaderboard = leaderboard.slice(0, 5);
+    saveLeaderboard();
+    displayLeaderboard();
+}
+
+function displayLeaderboard() {
+    var leaderboardElement = document.getElementById('leaderboard');
+    leaderboardElement.innerHTML = 'Leaderboard:<br>';
+    leaderboard.forEach((score, index) => {
+        leaderboardElement.innerHTML += `${index + 1}. ${score}<br>`;
+    });
+}
+
 // hàm gọi game
 requestAnimationFrame(loop);
+displayLeaderboard();
