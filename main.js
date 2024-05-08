@@ -1,7 +1,7 @@
 window.onload = function () {
   var canvas = document.getElementById("game");
   var context = canvas.getContext("2d");
-
+  var leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
   var grid = 20;
   var score = 0;
   var snake = {
@@ -15,7 +15,6 @@ window.onload = function () {
 
   // game loop
   function loop() {
-    console.log("aaa");
     requestAnimationFrame(loop);
 
     // thêm vị trí mà con rắn đi qua, index số 0 là đầu rắn
@@ -31,30 +30,30 @@ window.onload = function () {
     });
     
     // Bảng xếp hạng
-var leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+  
 
-function saveLeaderboard() {
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-}
+  function saveLeaderboard() {
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+  }
 
-function updateLeaderboard() {
-    leaderboard.push(score);
-    leaderboard.sort((a, b) => b - a);
-    leaderboard = leaderboard.slice(0, 5);
-    saveLeaderboard();
-    displayLeaderboard();
-}
+  function updateLeaderboard() {
+      leaderboard.push(score);
+      leaderboard.sort((a, b) => b - a);
+      leaderboard = leaderboard.slice(0, 5);
+      saveLeaderboard();
+      displayLeaderboard();
+  }
 
-function displayLeaderboard() {
-    var leaderboardElement = document.getElementById('leaderboard');
-    leaderboardElement.innerHTML = 'Leaderboard:<br>';
-    leaderboard.forEach((score, index) => {
-        leaderboardElement.innerHTML += `${index + 1}. ${score}<br>`;
-    });
-}
+  function displayLeaderboard() {
+      var leaderboardElement = document.getElementById('leaderboard');
+      leaderboardElement.innerHTML = 'Leaderboard:<br>';
+      leaderboard.forEach((score, index) => {
+          leaderboardElement.innerHTML += `${index + 1}. ${score}<br>`;
+      });
+  }
     
 // hàm gọi game
-requestAnimationFrame(loop);
-displayLeaderboard();    
-}
-
+  requestAnimationFrame(loop);
+  displayLeaderboard();   
+  }
+} 
