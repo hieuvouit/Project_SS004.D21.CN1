@@ -28,6 +28,25 @@ window.onload = function () {
     context.fillStyle = "green";
     snake.cells.forEach(function (cell, index) {
       context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+
+      // Duyệt thân
+      for (var i = index + 1; i < snake.cells.length; i++) {
+        // Khi rắn dụng thân, reset game
+        if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+            snake.x = 160;
+            snake.y = 160;
+            snake.cells = [];
+            snake.maxCells = 4;
+            snake.dx = grid;
+            snake.dy = 0;
+
+            apple.x = getRandomInt(0, 25) * grid;
+            apple.y = getRandomInt(0, 25) * grid;
+            updateLeaderboard();
+            score = 0;
+            document.getElementById('score').innerText = 'Score: ' + score;
+        }
+      }
     });
     
     // Bảng xếp hạng
