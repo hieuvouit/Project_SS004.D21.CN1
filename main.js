@@ -125,3 +125,4 @@ window.onload = function () {
   requestAnimationFrame(loop);
   displayLeaderboard();
 };
+
