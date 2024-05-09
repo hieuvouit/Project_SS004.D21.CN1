@@ -19,6 +19,7 @@ window.onload = function () {
   function loop() {
     requestAnimationFrame(loop);
 
+
     if (++count < 10) {
       return;
     }
@@ -30,11 +31,10 @@ window.onload = function () {
     snake.x += snake.dx;
     snake.y += snake.dy;
 
-    if (snake.x < 0) {
-      snake.x = canvas.width - grid;
-    } else if (snake.x >= canvas.width) {
-      snake.x = 0;
-    }
+
+    // Hiệu ứng di chuyển
+    if (snake.cells.length > snake.maxCells) {
+      snake.cells.pop();
 
     // Reset đầu rắn nếu tràn khỏi màn hình chiều dọc
     if (snake.y < 0) {
