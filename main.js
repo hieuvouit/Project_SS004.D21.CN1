@@ -17,11 +17,22 @@ window.onload = function () {
   function loop() {
     requestAnimationFrame(loop);
 
+    // Di chuyển
+    snake.x += snake.dx;
+    snake.y += snake.dy;
+
+    // Hiệu ứng di chuyển
+    if (snake.cells.length > snake.maxCells) {
+      snake.cells.pop();
+    }
+
     // thêm vị trí mà con rắn đi qua, index số 0 là đầu rắn
     snake.cells.unshift({
       x: snake.x,
       y: snake.y,
     });
+
+    
 
     // Duyệt thân và vẽ rắn
     context.fillStyle = "green";
