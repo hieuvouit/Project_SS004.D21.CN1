@@ -25,3 +25,9 @@ canvas {
     color: white;
     font-size: 40px
 }
+
+#leaderboard {
+    margin-top: 20px;
+    color: white;
+    font-size: 40px;
+}
