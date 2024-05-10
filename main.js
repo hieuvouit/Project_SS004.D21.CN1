@@ -14,6 +14,16 @@ window.onload = function () {
     cells: [],
     maxCells: 4,
   };
+  // đối tượng mồi
+  var apple = {
+    x: 320,
+    y: 320
+  };
+
+  // hàm random
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 
   // game loop
   function loop() {
@@ -47,6 +57,10 @@ window.onload = function () {
     // Hiệu ứng di chuyển
     if (snake.cells.length > snake.maxCells) {
       snake.cells.pop();
+    
+    // Vẽ mồi 
+    context.fillStyle = 'red';
+    context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
     // Reset đầu rắn nếu tràn khỏi màn hình chiều dọc
     if (snake.y < 0) {
@@ -70,6 +84,16 @@ window.onload = function () {
     context.fillStyle = "green";
     snake.cells.forEach(function (cell, index) {
       context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+  
+      // Cộng thêm điểm nếu rắn ăn mồi, xuất hiện mồi mới
+      if (cell.x === apple.x && cell.y === apple.y) {
+        snake.maxCells++;
+        score++;
+        document.getElementById('score').innerText = 'Score: ' + score;
+        apple.x = getRandomInt(0, 25) * grid;
+        apple.y = getRandomInt(0, 25) * grid;
+      }
+
       // Duyệt thân
       for (var i = index + 1; i < snake.cells.length; i++) {
         if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
@@ -80,6 +104,8 @@ window.onload = function () {
           snake.dx = grid;
           snake.dy = 0;
 
+          apple.x = getRandomInt(0, 25) * grid;
+          apple.y = getRandomInt(0, 25) * grid;
           updateLeaderboard();
           score = 0;
           document.getElementById("score").innerText = "Score: " + score;
